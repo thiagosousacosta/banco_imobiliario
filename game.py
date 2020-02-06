@@ -41,14 +41,18 @@ class Tabuleiro():
                     if jogador.pode_comprar(self.casas[jogador.casa_atual-1].valor_aluguel, self.casas[jogador.casa_atual-1].valor_casa):
                         self.casas[jogador.casa_atual-1].dono_propriedade = jogador.tipo_jogador
                         jogador.dinheiro - self.casas[jogador.casa_atual-1].valor_casa
-                        
                 else:
                     dono_propriedade = [x for x in self.jogadores if x.tipo_jogador == self.casas[jogador.casa_atual-1].dono_propriedade][0]
                     jogador.dinheiro -= self.casas[jogador.casa_atual-1].valor_aluguel
                     dono_propriedade.dinheiro += self.casas[jogador.casa_atual-1].valor_aluguel
                 
-
-                    
+                if jogador.dinheiro < 0:
+                    tipo_jogador = jogador.tipo_jogador
+                    casas_jogador = [x for x in self.casas if x.dono_propriedade == tipo_jogador]
+                    for casa in casas_jogador:
+                        casa.dono_propriedade = ''
+                    self.jogadores.remove(jogador)
+        set_trace()                    
 
 if __name__ == "__main__":
     jogador1 = Jogador('impulsivo')
