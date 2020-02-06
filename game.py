@@ -40,7 +40,7 @@ class Tabuleiro():
                 if self.casas[jogador.casa_atual-1].dono_propriedade == '':
                     if jogador.pode_comprar(self.casas[jogador.casa_atual-1].valor_aluguel, self.casas[jogador.casa_atual-1].valor_casa):
                         self.casas[jogador.casa_atual-1].dono_propriedade = jogador.tipo_jogador
-                        jogador.dinheiro - self.casas[jogador.casa_atual-1].valor_casa
+                        jogador.dinheiro -= self.casas[jogador.casa_atual-1].valor_casa
                 else:
                     dono_propriedade = [x for x in self.jogadores if x.tipo_jogador == self.casas[jogador.casa_atual-1].dono_propriedade][0]
                     jogador.dinheiro -= self.casas[jogador.casa_atual-1].valor_aluguel
