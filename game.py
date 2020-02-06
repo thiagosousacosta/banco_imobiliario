@@ -1,9 +1,13 @@
+import statistics
 from pdb import set_trace
-from random import randint, randrange
+from random import randint, randrange, sample
 from player import Jogador
 
-QUANTIDADE_CASAS = 20
-QUANTIDADE_ROUNDS = 1000
+QUANTIDADE_CASAS        = 20
+QUANTIDADE_ROUNDS       = 1000
+QUANTIDADE_SIMULACOES   = 300
+DINHEIRO_POR_ROUND      = 100
+PORCENTAGEM_ALUGUEL     = 0.2
 
 class Casa():
     def __init__(self):
@@ -22,7 +26,7 @@ class Tabuleiro():
             casa = Casa()
             casa.numero_casa = x + 1
             casa.valor_casa = randrange(50,500,10)
-            casa.valor_aluguel = casa.valor_casa * 0.2
+            casa.valor_aluguel = casa.valor_casa * PORCENTAGEM_ALUGUEL
             self.casas.append(casa)
             
     def jogar(self):
@@ -31,11 +35,11 @@ class Tabuleiro():
                 
                 numero_dado = randrange(1,7)
 
-                if jogador.casa_atual + numero_dado <= 20:
+                if jogador.casa_atual + numero_dado <= QUANTIDADE_CASAS:
                     jogador.casa_atual = jogador.casa_atual + numero_dado
                 else: 
-                    jogador.casa_atual = (jogador.casa_atual + numero_dado) - 20
-                    jogador.dinheiro += 100
+                    jogador.casa_atual = (jogador.casa_atual + numero_dado) - QUANTIDADE_CASAS
+                    jogador.dinheiro += DINHEIRO_POR_ROUND
                 
                 if self.casas[jogador.casa_atual-1].dono_propriedade == '':
                     if jogador.pode_comprar(self.casas[jogador.casa_atual-1].valor_aluguel, self.casas[jogador.casa_atual-1].valor_casa):
@@ -52,13 +56,42 @@ class Tabuleiro():
                     for casa in casas_jogador:
                         casa.dono_propriedade = ''
                     self.jogadores.remove(jogador)
-        set_trace()                    
+            
+            if len(self.jogadores) == 1:
+                timeout = 0
+                jogador_ganhador = self.jogadores[0].tipo_jogador
+                return timeout, jogador_ganhador, rounds
+
+        timeout = 1
+        jogador_ganhador = [x.tipo_jogador for x in self.jogadores if x.dinheiro == max([x.dinheiro for x in self.jogadores])][0]
+        return timeout, jogador_ganhador, rounds
 
 if __name__ == "__main__":
-    jogador1 = Jogador('impulsivo')
-    jogador2 = Jogador('exigente')
-    jogador3 = Jogador('cauteloso')
-    jogador4 = Jogador('aleatorio')
+    resultado_final = []
+    for x in range(QUANTIDADE_SIMULACOES):
+        jogadores = [Jogador(x) for x in sample(range(1,5), 4)]
+        tabuleiro = Tabuleiro(jogadores)
+        resultado = tabuleiro.jogar()
+        resultado_final.append(resultado)
 
-    tabuleiro = Tabuleiro([jogador1, jogador2, jogador3, jogador4])
-    tabuleiro.jogar()
+    partidas_timeout = sum([x[0] for x in resultado_final if x[0] == 1])
+    media_turno = round(sum([x[2] for x in resultado_final])/QUANTIDADE_SIMULACOES)
+
+    resultado_exigente = (len([x[1] for x in resultado_final if x[1] == 'exigente'] )/QUANTIDADE_SIMULACOES) * 100
+    resultado_impulsivo  = (len([x[1] for x in resultado_final if x[1] == 'impulsivo'])/QUANTIDADE_SIMULACOES) * 100
+    resultado_cauteloso = (len([x[1] for x in resultado_final if x[1] == 'cauteloso'])/QUANTIDADE_SIMULACOES) * 100
+    resultado_aleatorio = (len([x[1] for x in resultado_final if x[1] == 'aleatorio'])/QUANTIDADE_SIMULACOES) * 100
+    
+    comportamento_ganhador = statistics.mode([x[1] for x in resultado_final])
+
+    print(f'''
+        Partidas Time Out   = {partidas_timeout}
+        Média de turnos     = {media_turno}
+        
+        Resultado Exigente  = {resultado_exigente}
+        Resultado Impulsivo = {resultado_impulsivo}
+        Resultado Cauteloso = {resultado_cauteloso}
+        Resultado Aleatório = {resultado_aleatorio}
+
+        Comportamento Ganhador = {comportamento_ganhador}
+                ''')
