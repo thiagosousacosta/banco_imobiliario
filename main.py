@@ -32,10 +32,10 @@ if __name__ == "__main__":
         Partidas Time Out   = {partidas_timeout}
         Média de turnos     = {media_turno}
         
-        Resultado Exigente  = {porcentagem_exigente}%
-        Resultado Impulsivo = {porcentagem_impulsivo}%
-        Resultado Cauteloso = {porcentagem_calteloso}%
-        Resultado Aleatório = {porcentagem_aleatorio}%
+        Porcentagem de vitória - Exigente  = {porcentagem_exigente}%
+        Porcentagem de vitória - Impulsivo = {porcentagem_impulsivo}%
+        Porcentagem de vitória - Cauteloso = {porcentagem_calteloso}%
+        Porcentagem de vitória - Aleatório = {porcentagem_aleatorio}%
 
         Comportamento Ganhador = {comportamento_ganhador}
                 ''')
