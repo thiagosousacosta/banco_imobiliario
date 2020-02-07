@@ -21,16 +21,21 @@ if __name__ == "__main__":
     resultado_cauteloso = (len([x[1] for x in resultado_final if x[1] == 'cauteloso'])/QUANTIDADE_SIMULACOES) * 100
     resultado_aleatorio = (len([x[1] for x in resultado_final if x[1] == 'aleatorio'])/QUANTIDADE_SIMULACOES) * 100
     
+    porcentagem_exigente  = round(resultado_exigente)
+    porcentagem_impulsivo = round(resultado_impulsivo)
+    porcentagem_calteloso = round(resultado_cauteloso)
+    porcentagem_aleatorio = round(resultado_aleatorio)
+
     comportamento_ganhador = statistics.mode([x[1] for x in resultado_final])
 
     print(f'''
         Partidas Time Out   = {partidas_timeout}
         Média de turnos     = {media_turno}
         
-        Resultado Exigente  = {resultado_exigente}
-        Resultado Impulsivo = {resultado_impulsivo}
-        Resultado Cauteloso = {resultado_cauteloso}
-        Resultado Aleatório = {resultado_aleatorio}
+        Resultado Exigente  = {porcentagem_exigente}%
+        Resultado Impulsivo = {porcentagem_impulsivo}%
+        Resultado Cauteloso = {porcentagem_calteloso}%
+        Resultado Aleatório = {porcentagem_aleatorio}%
 
         Comportamento Ganhador = {comportamento_ganhador}
                 ''')
