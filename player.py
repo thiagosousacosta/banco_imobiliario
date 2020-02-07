@@ -7,30 +7,30 @@ class Jogador():
         self.casa_atual = 0
         
         if tipo_jogador == 1:
-            self.tipo_jogador = 'impulsivo'
+            self.tipo_jogador = 'Impulsivo'
         elif tipo_jogador == 2:
-            self.tipo_jogador = 'exigente'
+            self.tipo_jogador = 'Exigente'
         elif tipo_jogador == 3:
-            self.tipo_jogador = 'cauteloso'
+            self.tipo_jogador = 'Cauteloso'
         elif tipo_jogador == 4:
-            self.tipo_jogador = 'aleatorio'
+            self.tipo_jogador = 'Aleatorio'
 
     def pode_comprar(self, valor_aluguel, valor_casa):
-        if self.tipo_jogador == 'impulsivo':
+        if self.tipo_jogador == 'Impulsivo':
             if self.dinheiro >= valor_casa:
                 return True
 
-        elif self.tipo_jogador == 'exigente':
+        elif self.tipo_jogador == 'Exigente':
             if valor_aluguel > 50:
                 if self.dinheiro >= valor_casa:
                     return True
 
-        elif self.tipo_jogador == 'cauteloso':
+        elif self.tipo_jogador == 'Cauteloso':
             if self.dinheiro - valor_casa >= 80:
                 if self.dinheiro >= valor_casa:
                     return True
 
-        elif self.tipo_jogador == 'aleatorio':
+        elif self.tipo_jogador == 'Aleatorio':
             if randint(1,10) > 5:
                 if self.dinheiro >= valor_casa:
                     return True

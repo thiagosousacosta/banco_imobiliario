@@ -16,10 +16,10 @@ if __name__ == "__main__":
     partidas_timeout = sum([x[0] for x in resultado_final if x[0] == 1])
     media_turno = round(sum([x[2] for x in resultado_final])/QUANTIDADE_SIMULACOES)
 
-    resultado_exigente = (len([x[1] for x in resultado_final if x[1] == 'exigente'] )/QUANTIDADE_SIMULACOES) * 100
-    resultado_impulsivo  = (len([x[1] for x in resultado_final if x[1] == 'impulsivo'])/QUANTIDADE_SIMULACOES) * 100
-    resultado_cauteloso = (len([x[1] for x in resultado_final if x[1] == 'cauteloso'])/QUANTIDADE_SIMULACOES) * 100
-    resultado_aleatorio = (len([x[1] for x in resultado_final if x[1] == 'aleatorio'])/QUANTIDADE_SIMULACOES) * 100
+    resultado_exigente = (len([x[1] for x in resultado_final if x[1] == 'Exigente'] )/QUANTIDADE_SIMULACOES) * 100
+    resultado_impulsivo  = (len([x[1] for x in resultado_final if x[1] == 'Impulsivo'])/QUANTIDADE_SIMULACOES) * 100
+    resultado_cauteloso = (len([x[1] for x in resultado_final if x[1] == 'Cauteloso'])/QUANTIDADE_SIMULACOES) * 100
+    resultado_aleatorio = (len([x[1] for x in resultado_final if x[1] == 'Aleatorio'])/QUANTIDADE_SIMULACOES) * 100
     
     porcentagem_exigente  = round(resultado_exigente)
     porcentagem_impulsivo = round(resultado_impulsivo)
