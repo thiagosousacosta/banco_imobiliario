@@ -1,16 +1,10 @@
 from random import randrange
+from game_home import Casa
 
 QUANTIDADE_CASAS        = 20
 QUANTIDADE_ROUNDS       = 1000
 DINHEIRO_POR_ROUND      = 100
 PORCENTAGEM_ALUGUEL     = 0.2
-
-class Casa():
-    def __init__(self):
-        self.numero_casa = 0
-        self.valor_casa = 0
-        self.valor_aluguel = 0
-        self.dono_propriedade = ''
 
 class Tabuleiro():
     def __init__(self, jogadores):
